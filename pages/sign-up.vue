@@ -10,12 +10,23 @@
         <v-container>
           <v-row>
             <v-col cols="12">
+              <v-file-input
+                outlined
+                prepend-icon=""
+                label="Avatar"
+                append-icon="mdi-baby-face-outline"
+                hide-details
+              ></v-file-input>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <v-text-field
                 label="Enter email"
                 placeholder="Email"
                 outlined
                 clearable
-                hide-details="auto"
+                hide-details
                 v-model="email"
               ></v-text-field>
             </v-col>
@@ -28,7 +39,7 @@
                 placeholder="Password"
                 outlined
                 clearable
-                hide-details="auto"
+                hide-details
                 v-model="password"
               ></v-text-field>
             </v-col>
@@ -48,7 +59,7 @@
           </v-row>
           <v-row>
             <v-col md="9" offset-md="4">
-              <v-btn class="primary">Submit</v-btn>
+              <v-btn color="#4388A2" class="white--text">Submit</v-btn>
             </v-col>
           </v-row>
         </v-container>

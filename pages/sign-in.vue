@@ -2,7 +2,7 @@
     <div class="sign-in">
         <v-card class="mx-auto my-12" width="374">
       <v-card-title class="mt-4">
-        <v-row align="center" justify="center">
+        <v-row class="mt-4" align="center" justify="center">
           <h1>Sign In</h1>
         </v-row>
       </v-card-title>
@@ -35,7 +35,7 @@
           </v-row>
           <v-row>
             <v-col md="9" offset-md="4">
-              <v-btn class="primary">Submit</v-btn>
+              <v-btn color="#4388A2" class="white--text">Submit</v-btn>
             </v-col>
           </v-row>
         </v-container>

@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-file">
+  <div class="upload-file pt-2">
     <Card title="Upload File" icon="mdi-upload">
       <div class="upload-container">
         <v-form>
@@ -27,10 +27,3 @@
     </Card>
   </div>
 </template>
-<style  >
-.upload-container{
-    padding-top: 10px;
-}
-
-
-</style>

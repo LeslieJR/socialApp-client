@@ -1,7 +1,7 @@
 <template>
   <div class="recent-uploads">
     <Card title="Recent Uploads" icon="mdi-folder-multiple-image">
-      <v-row>
+      <v-row class="pt-1 pb-1">
         <v-col cols="3" v-for="upload in uploads" :key="upload.id">
           <v-img :src="upload.image" />
         </v-col>
@@ -67,9 +67,3 @@ export default {
   },
 };
 </script>
-<style>
-.recent-uploads .row{
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-</style>

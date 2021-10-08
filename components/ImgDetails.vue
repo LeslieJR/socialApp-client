@@ -29,7 +29,7 @@
             </v-chip>
            
           </v-col>
-          <v-col cols="4" class="date">
+          <v-col cols="4" class="date d-flex justify-end">
                <v-chip class="ma-2"  color="transparent">
                 {{date}}         
             </v-chip>

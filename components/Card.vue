@@ -1,7 +1,7 @@
 <template>
   <div class="rs-card">
     <v-card>
-      <v-card-title :class="remove ? 'rs-remove' : 'rs-card-title'">
+      <v-card-title v-if="header" :class="remove ? 'rs-remove' : 'rs-card-title'">
         <div v-if="remove" class="rs-card-remove d-flex justify-space-between">
           <h2 class="white--text">{{ title }}</h2>
           <v-btn color="#D32F2F" class="white--text">Delete</v-btn>
@@ -23,8 +23,11 @@
 export default {
   props: {
     title: {
-      type: String,
-      required: true,
+      type: String
+    },
+    header:{
+        type: Boolean,
+        default: true
     },
     icon: {
       type: String,
