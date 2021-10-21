@@ -18,12 +18,12 @@
     </v-main>
   </v-app>
 </template>
-
 <script>
 export default {
-  data () {
-    return {
-     
+  beforeMount(){
+    const token = localStorage.getItem('token');
+    if(token){
+      this.$store.commit('user/saveToken', token)
     }
   }
 }
