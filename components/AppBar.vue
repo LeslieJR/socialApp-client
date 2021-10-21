@@ -3,8 +3,8 @@
         <v-app-bar app>
         <v-toolbar-title class="white--text">Social App</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn text class="mx-2 white--text">sign in</v-btn>
-        <v-btn text class="white--text">sign up</v-btn>
+        <v-btn text class="mx-2 white--text" to="/sign-in">sign in</v-btn>
+        <v-btn text class="white--text" to="/sign-up">sign up</v-btn>
     </v-app-bar>
     </div>
 </template>

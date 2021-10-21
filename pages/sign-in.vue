@@ -29,7 +29,11 @@
         </v-card-text>
 
         <v-card-actions class="d-flex justify-end pr-4">
-          <v-btn color="#4388A2" class="white--text" @click="onSubmit" @keyup.enter="onSubmit"
+          <v-btn
+            color="#4388A2"
+            class="white--text"
+            @click="onSubmit"
+            @keyup.enter="onSubmit"
             >Submit</v-btn
           >
         </v-card-actions>
@@ -49,9 +53,15 @@ export default {
       password: "",
     };
   },
+  created() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.$router.push("/home");
+    }
+  },
   methods: {
     async onSubmit() {
-      console.log('on submit')
+      console.log("on submit");
       if (!this.email || !this.password) {
         alert("email or password missing");
       }
@@ -59,7 +69,7 @@ export default {
         email: this.email,
         password: this.password,
       };
-    
+
       try {
         const res = await fetch(
           "https://social-app-leslie.herokuapp.com/api/user/sign-in",
@@ -76,7 +86,7 @@ export default {
           alert(data.err);
         } else {
           alert("user successfully logged in");
-          this.$store.dispatch('user/saveToken', data.token)
+          this.$store.dispatch("user/saveToken", data.token);
           this.$router.push("/home");
         }
       } catch (err) {

@@ -77,6 +77,12 @@ export default {
       password2: "",
     };
   },
+  created() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.$router.push("/home");
+    }
+  },
   methods: {
     async onSubmit() {
       if (this.password !== this.password2) {
