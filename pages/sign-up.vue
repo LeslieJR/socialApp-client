@@ -77,7 +77,14 @@ export default {
       password2: "",
     };
   },
-  created() {
+  asyncData(ctx){
+    const token = ctx?.store.state.user.token;
+    
+    if(token){
+      ctx.redirect("/home")
+    }
+  },
+  beforeMount() {
     const token = localStorage.getItem("token");
     if (token) {
       this.$router.push("/home");
