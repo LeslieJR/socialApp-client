@@ -25,11 +25,9 @@ export default {
     };
   },
   created() {
-    console.log("inside created");
     if (process.client) {
-      console.log("[created]: ",process.client);
       const token = localStorage.getItem("token");
-      console.log("[created]: ",token);
+      
       if (token) {
         this.token = token;
       }
@@ -38,7 +36,7 @@ export default {
   methods:{
       logout(){
           this.$store.dispatch("user/removeToken")
-          this.$router.push('/sign-in')
+          //this.$router.push('/sign-in')
       }
   }
 };

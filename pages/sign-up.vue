@@ -115,7 +115,6 @@ export default {
         if (data.err) {
           alert(data.err);
         } else {
-          alert("user created");
           this.$router.push("/sign-in");
         }
       } catch (err) {

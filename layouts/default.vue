@@ -25,6 +25,13 @@ export default {
     if(token){
       this.$store.commit('user/saveToken', token)
     }
+  },
+  watch: {
+    '$store.state.user.token'(value) {
+      if (!value) {
+        this.$router.push('/sign-in')
+      }
+    }
   }
 }
 </script>

@@ -9,7 +9,7 @@
             v-for="image in images"
             :key="image._id"
           >
-            <v-img :src="image.image" />
+            <v-img :src="image.image" @click="details(image._id)"/>
           </v-col>
         </v-row>
       </div>
@@ -43,6 +43,9 @@ export default {
       } catch (err) {
         console.log({ err: err.message });
       }
+    },
+    details(postId) {
+      this.$router.push(`/details/${postId}`)
     },
   },
 };

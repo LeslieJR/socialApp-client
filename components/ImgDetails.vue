@@ -15,17 +15,17 @@
         </v-row>
         <v-row class="rs-info">
           <v-col cols="8">
-            <v-btn class="primary">
+            <v-btn class="primary" >
               <v-icon class="pr-1">mdi-thumb-up </v-icon>
               Like
             </v-btn>
             <v-chip class="ma-2" color="indigo darken-3" outlined>
               <v-icon class="pr-1">mdi-cards-heart</v-icon>
-              Likes 12
+              Likes: {{likes}}
             </v-chip>
             <v-chip class="ma-2" color="indigo darken-3" outlined>
               <v-icon class="pr-1">mdi-eye-settings</v-icon>
-              Views 20
+              Views: {{views}} 
             </v-chip>
            
           </v-col>
@@ -43,13 +43,32 @@
 export default {
   data() {
     return {
-      image:
-        "https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg",
-      title: "Image title",
-      description: "Something here",
+      image: undefined,
+      title: "",
+      description: "",
+      likes:0,
+      views:0,
       date:"12/06/2019"
     };
   },
+  async mounted(){
+    await this.loadDetails()
+  },
+  methods:{
+    async loadDetails(){
+      try{
+        const res = await fetch(`http://localhost:4000/api/post/details/${this.$route.params.id}`)
+        const data = await res.json();
+        this.image = data.post.image
+        this.title = data.post.title
+        this.description = data.post.description
+        this.likes = data.post.likes
+        this.views = data.post.views
+      }catch(err){
+        console.log({err: err.message})
+      }
+    }
+  }
 };
 </script>
 <style>

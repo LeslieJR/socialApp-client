@@ -7,6 +7,7 @@
         :image="comment.post.image"
         :email="comment.user.email"
         :comment="comment.comment"
+        :post_id="comment.post._id"
       />
     </Card>
   </div>
