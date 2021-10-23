@@ -23,6 +23,7 @@ export const actions = {
   removeToken(context) {
     context.commit("setToken", null);
     localStorage.clear();
+    
   }
 };
 

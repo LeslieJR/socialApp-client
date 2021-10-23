@@ -1,7 +1,10 @@
 <template>
   <div class="app-bar">
     <v-app-bar app>
-      <v-toolbar-title class="white--text" to="/home">Social App</v-toolbar-title>
+      <v-toolbar-title >
+      <v-btn to="/home" plain class="white--text">Social App</v-btn>
+      
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!token">
         <v-btn text class="mx-2 white--text" to="/sign-in">Sign in</v-btn>
@@ -35,6 +38,7 @@ export default {
   methods:{
       logout(){
           this.$store.dispatch("user/removeToken")
+          this.$router.push('/sign-in')
       }
   }
 };

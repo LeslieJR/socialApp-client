@@ -6,28 +6,28 @@
           <v-list-item-icon>
             <v-icon>mdi-file-image</v-icon>
           </v-list-item-icon>
-          <v-list-item-content> Images 0</v-list-item-content>
+          <v-list-item-content> Images: {{count_img}}</v-list-item-content>
         </v-list-item>
 
         <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-comment</v-icon>
           </v-list-item-icon>
-          <v-list-item-content> Comments 0 </v-list-item-content>
+          <v-list-item-content> Comments: {{count_comments}}</v-list-item-content>
         </v-list-item>
 
         <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-eye-settings</v-icon>
           </v-list-item-icon>
-          <v-list-item-content> Views 0 </v-list-item-content>
+          <v-list-item-content> Views: {{views}}</v-list-item-content>
         </v-list-item>
 
         <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-thumb-up</v-icon>
           </v-list-item-icon>
-          <v-list-item-content> Likes 0 </v-list-item-content>
+          <v-list-item-content> Likes: {{likes}} </v-list-item-content>
         </v-list-item>
       </v-list>
     </Card>
@@ -41,25 +41,38 @@ export default {
       count_comments: 0,
       views: 0,
       likes: 0,
+      onFetch: undefined
     };
   },
-  mounted() {
-    this.getStats();
+  async mounted() {
+    await this.getStats();
+    this.onFetch = setInterval(async () => {
+      await this.getStats();
+    }, 2000);
   },
+  
+  beforeDestroy() {
+    clearInterval(this.onFetch)
+  },
+
   methods: {
     async getStats() {
       try {
         const res = await fetch(
-          "https://social-app-leslie.herokuapp.com/api/post/stats"
+          "http://localhost:4000/api/post/stats"
         );
         const data = await res.json();
-        console.log("[getStats] ",data)
+        this.count_img = data.count_img
+        this.count_comments = data.count_comments
+        this.views = data.views
+        this.likes = data.likes
+        
         if(data.err){
           console.log(data.err)
         }
         
       } catch (err) {
-        console.log(err);
+        console.log({err: err.message});
       }
     },
   },

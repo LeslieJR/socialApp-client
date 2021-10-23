@@ -78,7 +78,7 @@ export default {
 
       try {
         const res = await fetch(
-          "https://social-app-leslie.herokuapp.com/api/user/sign-in",
+          "http://localhost:4000/api/user/sign-in",
           {
             method: "POST",
             headers: {

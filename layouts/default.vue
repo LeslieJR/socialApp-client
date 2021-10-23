@@ -2,7 +2,7 @@
   <v-app >
     <AppBar />
     <v-main>
-      <v-container>
+      <v-container fluid>
         <v-row>
           <v-col cols="8">
             <Nuxt />

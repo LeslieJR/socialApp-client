@@ -3,9 +3,9 @@
     <Card title="Latest Comments" icon="mdi-comment">
       <Comment
         v-for="comment in comments"
-        :key="comment.id"
-        :image="comment.image"
-        :email="comment.email"
+        :key="comment._id"
+        :image="comment.post.image"
+        :email="comment.user.email"
         :comment="comment.comment"
       />
     </Card>
@@ -15,27 +15,26 @@
 export default {
   data() {
     return {
-      comments: [
-        {
-          id: 0,
-          image: "https://picsum.photos/id/241/200/300",
-          email: "leslie@reyes.com",
-          comment: "Awesooooome pic",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/id/242/200/300",
-          email: "marta@gmail.es",
-          comment: "Nice Pic",
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/id/243/200/300",
-          email: "pepe@gmail.com",
-          comment: "Woooow :O",
-        },
-      ],
+      comments: [],
     };
   },
+  async mounted(){
+    await this.loadComments();
+     this.onFetch = setInterval(async () => {
+      await this.loadComments();
+    }, 2000);
+  },
+  methods:{
+    async loadComments(){
+      try{
+        const res = await fetch('http://localhost:4000/api/comment/latest-comments')
+        const data = await res.json()
+        this.comments = data
+        console.log(this.comments)
+      }catch(err){
+        console.log({err: err.message})
+      }
+    }
+  }
 };
 </script>

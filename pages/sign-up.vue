@@ -105,7 +105,7 @@ export default {
       formData.append("password2", this.password2);
       try {
         const res = await fetch(
-          "https://social-app-leslie.herokuapp.com/api/user/sign-up",
+          "http://localhost:4000/api/user/sign-up",
           {
             method: "POST",
             body: formData,

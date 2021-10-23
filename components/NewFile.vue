@@ -60,22 +60,27 @@ export default {
         formData.append("description", this.description);
 
         const token = localStorage.getItem("token");
-
+        
         const res = await fetch(
-          "https://social-app-leslie.herokuapp.com/api/post/upload",
+          "http://localhost:4000/api/post/upload",
           {
             method: "POST",
             headers: {
-              token: token,
+              token
             },
             body: formData,
           }
         );
         const data = await res.json();
+        
         if (data.err) {
+          console.log(data)
           alert(data.err);
-        } else {
-          alert("POST CREATED");
+        } else{
+          console.log({"[new file upload]":data})
+          this.image = undefined
+          this.title=""
+          this.description=""
         }
       } catch (err) {
         alert(err.message);
