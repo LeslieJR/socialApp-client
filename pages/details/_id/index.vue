@@ -12,6 +12,7 @@ export default {
     isAuth(){
       return this.$store.getters['user/getToken']
     }
-  }
+  },
+  
 }
 </script>

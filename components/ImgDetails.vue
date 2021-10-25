@@ -15,7 +15,7 @@
         </v-row>
         <v-row class="rs-info">
           <v-col cols="8">
-            <v-btn class="primary" >
+            <v-btn class="primary" @click="onLike">
               <v-icon class="pr-1">mdi-thumb-up </v-icon>
               Like
             </v-btn>
@@ -48,11 +48,15 @@ export default {
       description: "",
       likes:0,
       views:0,
-      date:"12/06/2019"
+      date:"12/06/2019",
+      onFetch: undefined
     };
   },
   async mounted(){
-    await this.loadDetails()
+    await this.loadDetails();
+    this.onFetch = setInterval(async () => {
+      await this.loadDetails();
+    }, 2000);
   },
   methods:{
     async loadDetails(){
@@ -64,6 +68,36 @@ export default {
         this.description = data.post.description
         this.likes = data.post.likes
         this.views = data.post.views
+        
+      }catch(err){
+        console.log({err: err.message})
+      }
+    },
+    async onLike(){
+      try{
+        console.log('on like method')
+        const body= {
+          post_id: this.$route.params.id
+          }
+     
+        const res = await fetch(
+          "http://localhost:4000/api/post/like",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+          }
+        );
+        const data = await res.json();
+        console.log(data)
+        if (data.err) {
+          console.log(data)
+          alert(data.err);
+        } else{
+
+        } 
       }catch(err){
         console.log({err: err.message})
       }
