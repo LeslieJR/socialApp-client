@@ -34,6 +34,9 @@ export default {
       await this.loadComments();
     }, 2000);
   },
+  beforeDestroy() {
+    clearInterval(this.onFetch);
+  },
   methods: {
     async loadComments() {
       try {

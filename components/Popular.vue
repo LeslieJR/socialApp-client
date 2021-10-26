@@ -39,7 +39,6 @@ export default {
         const res = await fetch("http://localhost:4000/api/post/most-popular");
         const data = await res.json();
         this.images = data;
-        console.log(this.images);
       } catch (err) {
         console.log({ err: err.message });
       }

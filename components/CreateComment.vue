@@ -56,7 +56,7 @@ export default {
           }
         );
         const data = await res.json();
-        console.log({ "[createComment]": body });
+        console.log({ "[createComment]": {body}});
         if (data.err) {
           console.log(data);
           alert(data.err);

@@ -91,7 +91,6 @@ export default {
         if (data.err) {
           alert(data.err);
         } else {
-          alert("user successfully logged in");
           this.$store.dispatch("user/saveToken", data.token);
           this.$router.push("/home");
         }

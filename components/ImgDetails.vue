@@ -58,6 +58,9 @@ export default {
       await this.loadDetails();
     }, 2000);
   },
+  beforeDestroy() {
+    clearInterval(this.onFetch);
+  },
   methods:{
     async loadDetails(){
       try{

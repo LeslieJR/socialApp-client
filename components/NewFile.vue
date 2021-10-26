@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-file pt-2">
+  <div class="upload-file">
     <Card title="Upload File" icon="mdi-upload">
       <div class="upload-container">
         <v-card-text>
@@ -47,7 +47,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        console.log("[New Post] onsubmit");
         if (!this.image || !this.title || !this.description) {
           alert("REQUIRED FIELD EMPTY");
           return;
@@ -74,10 +73,8 @@ export default {
         const data = await res.json();
         
         if (data.err) {
-          console.log(data)
           alert(data.err);
         } else{
-          console.log({"[new file upload]":data})
           this.image = undefined
           this.title=""
           this.description=""
