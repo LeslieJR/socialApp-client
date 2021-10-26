@@ -53,10 +53,10 @@ export default {
       password: "",
     };
   },
-  asyncData(ctx){
+  asyncData(ctx) {
     const token = ctx?.store.state.user.token;
-    if(token){
-      ctx.redirect("/home")
+    if (token) {
+      ctx.redirect("/home");
     }
   },
   beforeMount() {
@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     async onSubmit() {
-      console.log("on submit");
       if (!this.email || !this.password) {
         alert("email or password missing");
       }
@@ -77,22 +76,21 @@ export default {
       };
 
       try {
-        const res = await fetch(
-          "http://localhost:4000/api/user/sign-in",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
+        const res = await fetch("http://localhost:4000/api/user/sign-in", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
         const data = await res.json();
         if (data.err) {
           alert(data.err);
         } else {
+          localStorage.setItem("avatar", data.avatar);
           this.$store.dispatch("user/saveToken", data.token);
-          this.$router.push("/home");
+          
+          //this.$router.push("/home");
         }
       } catch (err) {
         alert(err.message);

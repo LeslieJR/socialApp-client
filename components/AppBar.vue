@@ -11,7 +11,9 @@
         <v-btn text class="white--text" to="/sign-up">Sign up</v-btn>
       </div>
       <div v-else>
-          <v-avatar></v-avatar>
+          <v-avatar v-if="avatar">
+            <v-img :src="avatar"></v-img>
+          </v-avatar>
           <v-btn text class="white--text" @click="logout">Logout</v-btn>
       </div>
     </v-app-bar>
@@ -22,14 +24,16 @@ export default {
   data() {
     return {
       token: null,
+      avatar: undefined
     };
   },
   created() {
     if (process.client) {
       const token = localStorage.getItem("token");
-      
-      if (token) {
+      const avatar = localStorage.getItem("avatar")
+      if (token && avatar) {
         this.token = token;
+        this.avatar = avatar
       }
     }
   },

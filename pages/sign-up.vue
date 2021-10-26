@@ -84,11 +84,26 @@ export default {
       ctx.redirect("/home")
     }
   },
-  beforeMount() {
+  /*beforeMount() {
     const token = localStorage.getItem("token");
     if (token) {
       this.$router.push("/home");
     }
+  },*/
+  created() {
+    if (process.client) {
+      const token = localStorage.getItem('token')
+      if (token) {
+        this.$router.push('/home')
+      } else {
+        // this.isValid = true
+      }
+    }
+  },
+  computed: {
+    token() {
+      return this.$store.state.user.token
+    },
   },
   methods: {
     async onSubmit() {

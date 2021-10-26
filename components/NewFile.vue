@@ -3,13 +3,13 @@
     <Card title="Upload File" icon="mdi-upload">
       <div class="upload-container">
         <v-card-text>
-          <v-file-input
+           <v-file-input
             outlined
             prepend-icon=""
             label="Image"
             append-icon="mdi-file-upload"
             v-model="image"
-          ></v-file-input>
+          ></v-file-input> 
 
           <v-text-field
             outlined
