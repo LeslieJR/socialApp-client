@@ -2,7 +2,7 @@
   <div class="comment-item">
     <v-row class="pa-1">
       <v-col cols="4">
-        <v-img :src="image" @click="details(post_id)" />
+        <v-img :src="image" @click="details(post_id)" aspect-ratio="1"/>
       </v-col>
       <v-col cols="8">
         <strong>{{ email }}</strong>

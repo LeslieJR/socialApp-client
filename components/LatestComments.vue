@@ -1,5 +1,5 @@
 <template>
-  <div class="popular">
+  <div class="popular" v-if="this.comments.length > 0">
     <Card title="Latest Comments" icon="mdi-comment">
       <Comment
         v-for="comment in comments"
@@ -19,7 +19,7 @@ export default {
       comments: [],
     };
   },
-  async mounted(){
+  async beforeMount(){
     await this.loadComments();
      this.onFetch = setInterval(async () => {
       await this.loadComments();

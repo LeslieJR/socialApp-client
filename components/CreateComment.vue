@@ -33,7 +33,6 @@ export default {
   methods: {
     async postComment() {
       try {
-        console.log("posting a comment");
         if (!this.title || !this.comment) {
           alert("REQUIRED FIELD(S) EMPTY");
           return;
@@ -43,7 +42,6 @@ export default {
           title: this.title,
           comment: this.comment,
         };
-        console.log({ post_id: this.$route.params.id });
         const token = localStorage.getItem("token");
         const res = await fetch(
           "http://localhost:4000/api/comment/new-comment",
@@ -57,16 +55,14 @@ export default {
           }
         );
         const data = await res.json();
-        console.log({ "[createComment]": {body}});
         if (data.err) {
-          console.log(data);
           alert(data.err);
         } else {
           this.title = "";
           this.comment = "";
         }
       } catch (err) {
-        console.log({ err: err.message });
+        alert({ err: err.message });
       }
     },
   },

@@ -11,7 +11,7 @@
         <v-btn text class="white--text" to="/sign-up">Sign up</v-btn>
       </div>
       <div v-else>
-          <v-avatar v-if="avatar">
+          <v-avatar v-if="avatar" class="hidden-xs-only">
             <v-img :src="avatar"></v-img>
           </v-avatar>
           <v-btn text class="white--text" @click="logout">Logout</v-btn>

@@ -1,5 +1,5 @@
 <template>
-  <div class="popular">
+  <div class="popular" v-if="this.images.length>0">
     <Card title="Most Popular" icon="mdi-cards-heart">
       <div class="img-container">
         <v-row class="pa-2">
@@ -9,7 +9,7 @@
             v-for="image in images"
             :key="image._id"
           >
-            <v-img :src="image.image" @click="details(image._id)"/>
+            <v-img :src="image.image" @click="details(image._id)" aspect-ratio="1"/>
           </v-col>
         </v-row>
       </div>
@@ -24,7 +24,7 @@ export default {
       onFetch: undefined,
     };
   },
-  async mounted() {
+  async beforeMount() {
     await this.loadPopulars();
     this.onFetch = setInterval(async () => {
       await this.loadPopulars();

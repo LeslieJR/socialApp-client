@@ -44,7 +44,7 @@ export default {
       onFetch: undefined
     };
   },
-  async mounted() {
+  async beforeMount() {
     await this.getStats();
     this.onFetch = setInterval(async () => {
       await this.getStats();

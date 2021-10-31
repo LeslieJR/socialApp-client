@@ -4,8 +4,8 @@
       <div v-for="(comment, index) in comments" :key="index">
         <v-row align="center">
           <v-col cols="4" class="text-center">
-            <v-avatar size="110">
-              <img alt="Avatar" :src="comment.user.avatar" />
+            <v-avatar :size="size">
+              <img alt="Avatar" :src="comment.user.avatar"/>
             </v-avatar>
           </v-col>
           <v-col cols="8" align-self="center">
@@ -28,7 +28,7 @@ export default {
       onFetch: undefined,
     };
   },
-  async mounted() {
+  async beforeMount() {
     await this.loadComments();
     this.onFetch = setInterval(async () => {
       await this.loadComments();
@@ -37,6 +37,16 @@ export default {
   beforeDestroy() {
     clearInterval(this.onFetch);
   },
+  computed: {
+      size () {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 62
+          case 'sm': return 82
+          case 'md': return 110
+          case 'lg': return 110
+        }
+      },
+    },
   methods: {
     async loadComments() {
       try {
