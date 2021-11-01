@@ -1,4 +1,4 @@
-const HOSTNAME = "http://localhost:4000";
+const HOSTNAME = "https://social-app-leslie.herokuapp.com";
 
 //USER
 export const signUp = async (avatar, email, password, password2) => {
