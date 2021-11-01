@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import {signUp} from '../services'
 export default {
   layout: "custom",
   data() {
@@ -77,11 +78,11 @@ export default {
       password2: "",
     };
   },
-  asyncData(ctx){
+  asyncData(ctx) {
     const token = ctx?.store.state.user.token;
-    
-    if(token){
-      ctx.redirect("/home")
+
+    if (token) {
+      ctx.redirect("/home");
     }
   },
   /*beforeMount() {
@@ -92,9 +93,9 @@ export default {
   },*/
   created() {
     if (process.client) {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token");
       if (token) {
-        this.$router.push('/home')
+        this.$router.push("/home");
       } else {
         // this.isValid = true
       }
@@ -102,31 +103,17 @@ export default {
   },
   computed: {
     token() {
-      return this.$store.state.user.token
+      return this.$store.state.user.token;
     },
   },
   methods: {
     async onSubmit() {
-      if (this.password !== this.password2) {
-        alert("PASSWORDs DO NOT MATCH");
-        return;
-      }
-      //create a form
-      const formData = new FormData();
-      formData.enctype = "multipart/form-data";
-      formData.append("avatar", this.avatar);
-      formData.append("email", this.email);
-      formData.append("password", this.password);
-      formData.append("password2", this.password2);
       try {
-        const res = await fetch(
-          "http://localhost:4000/api/user/sign-up",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-        const data = await res.json();
+        if (this.password !== this.password2) {
+          alert("PASSWORDs DO NOT MATCH");
+          return;
+        }
+        const data = await signUp(this.avatar, this.email, this.password, this.password2)
         if (data.err) {
           alert(data.err);
         } else {

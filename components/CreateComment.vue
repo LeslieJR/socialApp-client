@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import {createComment} from '../services'
 export default {
   data() {
     return {
@@ -37,24 +38,10 @@ export default {
           alert("REQUIRED FIELD(S) EMPTY");
           return;
         }
-        const body = {
-          post_id: this.$route.params.id,
-          title: this.title,
-          comment: this.comment,
-        };
+        const post_id = this.$route.params.id;
         const token = localStorage.getItem("token");
-        const res = await fetch(
-          "http://localhost:4000/api/comment/new-comment",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":"application/json",
-              token,
-            },
-            body: JSON.stringify(body),
-          }
-        );
-        const data = await res.json();
+        
+        const data = await createComment(post_id, this.title, this.comment, token)
         if (data.err) {
           alert(data.err);
         } else {

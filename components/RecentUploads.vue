@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+import {recentPosts} from '../services'
 export default {
   data() {
     return {
@@ -41,10 +42,7 @@ export default {
   methods: {
     async loadPosts() {
       try {
-        const res = await fetch(
-          "http://localhost:4000/api/post/recent-uploads"
-        );
-        const data = await res.json();
+        const data = await recentPosts()
         this.uploads = data;
       } catch (err) {}
     },

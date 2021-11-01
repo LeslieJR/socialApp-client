@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import {allComments} from '../services'
 export default {
   data() {
     return {
@@ -50,10 +51,8 @@ export default {
   methods: {
     async loadComments() {
       try {
-        const res = await fetch(
-          `http://localhost:4000/api/post/details/${this.$route.params.id}`
-        );
-        const data = await res.json();
+        const post_id = this.$route.params.id
+        const data = await allComments(post_id);
         this.comments = data.comments;
       } catch (err) {
         console.log({ err: err.message });

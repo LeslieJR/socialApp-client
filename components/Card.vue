@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+import {deletePost} from '../services'
 export default {
   props: {
     title: {
@@ -46,28 +47,13 @@ export default {
   methods: {
     async deletePost() {
       try {
-        
-        const body = {
-          post_id: this.$route.params.id
-        }
-        const res = await fetch(
-          "http://localhost:4000/api/post/remove-post",
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body)
-          }
-        );
-        const data = await res.json()
+        const post_id= this.$route.params.id
+        const data = await deletePost(post_id)
         if(data.err){
-          console(data.err)
+          alert(data.err)
         }
-        console.log(data)
         this.$router.push('/home');
       } catch (err) {
-        console.log(err)
         alert({ err: err.message });
       }
     },

@@ -45,6 +45,7 @@
   </div>
 </template>
 <script>
+import { getDetails, getViews, giveLike } from "../services";
 export default {
   data() {
     return {
@@ -72,17 +73,8 @@ export default {
       try {
         const post_id = this.$route.params.id;
         const token = localStorage.getItem("token");
-        const res = await fetch(
-          `http://localhost:4000/api/post/details/${post_id}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              //typeof token : Object
-              ...(token ? { token } : {}),
-            },
-          }
-        );
-        const data = await res.json();
+
+        const data = await getDetails(post_id, token);
         if (data.err) {
           alert(data.err);
         }
@@ -96,37 +88,19 @@ export default {
       try {
         const post_id = this.$route.params.id;
         const token = localStorage.getItem("token");
-        const body = {
-          post_id,
-        };
 
-        const res = await fetch("http://localhost:4000/api/post/view", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
-        const data = await res.json();
+        const data = await getViews(post_id);
 
         if (data.err) {
           alert(data.err);
         }
-        const res2 = await fetch(
-          `http://localhost:4000/api/post/details/${post_id}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              ...(token ? { token } : {}),
-            },
-          }
-        );
-        const data2 = await res2.json();
-        this.isOwner = data2.isOwner;
-        console.log({ data: data2.isOwner });
+
+        const data2 = await getDetails(post_id, token);
+
         if (data2.err) {
           alert(data2.err);
         }
+        this.isOwner = data2.isOwner;
         this.image = data2.post.image;
         this.title = data2.post.title;
         this.description = data2.post.description;
@@ -138,19 +112,8 @@ export default {
     },
     async onLike() {
       try {
-        const body = {
-          post_id: this.$route.params.id,
-        };
-
-        const res = await fetch("http://localhost:4000/api/post/like", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
-        const data = await res.json();
-
+        const post_id = this.$route.params.id;
+        const data = await giveLike(post_id);
         if (data.err) {
           alert(data.err);
         }

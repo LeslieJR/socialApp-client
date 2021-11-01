@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import {popularPosts} from '../services'
 export default {
   data() {
     return {
@@ -36,8 +37,7 @@ export default {
   methods: {
     async loadPopulars() {
       try {
-        const res = await fetch("http://localhost:4000/api/post/most-popular");
-        const data = await res.json();
+        const data = await popularPosts()
         this.images = data;
       } catch (err) {
         console.log({ err: err.message });

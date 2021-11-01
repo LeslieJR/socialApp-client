@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import {latestComments} from '../services'
 export default {
   data() {
     return {
@@ -31,12 +32,11 @@ export default {
   methods:{
     async loadComments(){
       try{
-        const res = await fetch('http://localhost:4000/api/comment/latest-comments')
-        const data = await res.json()
+        const data = await latestComments();
         this.comments = data
-        console.log(this.comments)
+        
       }catch(err){
-        console.log({err: err.message})
+        alert({err: err.message})
       }
     }
   }

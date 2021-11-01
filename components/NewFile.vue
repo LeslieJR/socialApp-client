@@ -36,6 +36,7 @@
   </div>
 </template>
 <script>
+import {createPost} from '../services'
 export default {
   data() {
     return {
@@ -51,26 +52,9 @@ export default {
           alert("REQUIRED FIELD EMPTY");
           return;
         }
-        //create a form
-        const formData = new FormData();
-        formData.enctype = "multipart/form-data";
-        formData.append("image", this.image);
-        formData.append("title", this.title);
-        formData.append("description", this.description);
-
         const token = localStorage.getItem("token");
-        
-        const res = await fetch(
-          "http://localhost:4000/api/post/upload",
-          {
-            method: "POST",
-            headers: {
-              token
-            },
-            body: formData,
-          }
-        );
-        const data = await res.json();
+      
+        const data = await createPost(this.image, this.title, this.description, token)
         
         if (data.err) {
           alert(data.err);

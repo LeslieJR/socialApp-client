@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import {getStatistics} from '../services'
 export default {
   data() {
     return {
@@ -58,21 +59,18 @@ export default {
   methods: {
     async getStats() {
       try {
-        const res = await fetch(
-          "http://localhost:4000/api/post/stats"
-        );
-        const data = await res.json();
+        const data = await getStatistics()
         this.count_img = data.count_img
         this.count_comments = data.count_comments
         this.views = data.views
         this.likes = data.likes
         
         if(data.err){
-          console.log(data.err)
+          alert(data.err)
         }
         
       } catch (err) {
-        console.log({err: err.message});
+        alert({err: err.message});
       }
     },
   },

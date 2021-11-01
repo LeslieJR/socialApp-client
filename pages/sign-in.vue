@@ -45,6 +45,7 @@
   </div>
 </template>
 <script>
+import { signIn } from "../services";
 export default {
   layout: "custom",
   data() {
@@ -67,29 +68,18 @@ export default {
   },
   methods: {
     async onSubmit() {
-      if (!this.email || !this.password) {
-        alert("email or password missing");
-      }
-      const body = {
-        email: this.email,
-        password: this.password,
-      };
-
       try {
-        const res = await fetch("http://localhost:4000/api/user/sign-in", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
-        const data = await res.json();
+        if (!this.email || !this.password) {
+          alert("email or password missing");
+        }
+
+        const data = await signIn(this.email, this.password);
         if (data.err) {
           alert(data.err);
         } else {
           localStorage.setItem("avatar", data.avatar);
           this.$store.dispatch("user/saveToken", data.token);
-          
+
           //this.$router.push("/home");
         }
       } catch (err) {
